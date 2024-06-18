@@ -1,5 +1,8 @@
 package main;
 
+import inputs.CustomMouseListener;
+import inputs.KeyboardListener;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,9 +11,24 @@ public class GamePanel extends JPanel {
     private Render render;
     private Game game;
 
+    private CustomMouseListener customMouseListener;
+    private KeyboardListener keyboardListener;
+
     public GamePanel(Game game) {
         this.game = game;
         setPanelSize();
+    }
+
+    public void InitInputs() {
+        customMouseListener = new CustomMouseListener(game);
+        keyboardListener = new KeyboardListener();
+
+        addMouseListener(customMouseListener);
+        addMouseMotionListener(customMouseListener);
+        addKeyListener(keyboardListener);
+
+        //Get the focus of this component (JFrame)
+        requestFocus();
     }
 
     private void setPanelSize() {

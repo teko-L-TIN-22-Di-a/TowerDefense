@@ -1,4 +1,4 @@
-# Tower-Defense Spiel mit Kartenspiel Mechaniken
+# Tower-Defense Spiel mit Kartenspiel Mechaniken EPIC
 
 In diesem Dokument werden die einzelnen Teile des gesamten Projektes gesammelt und beschrieben.
 
@@ -15,3 +15,9 @@ Sounds werden je nach Möglichkeit aus dem Internet bezogen mit einen gültigen,
 
 ## Schwierigkeitsstufen
 Nach Möglichkeit und Zeit werden Schwierigkeitsstufen eingefügt, welche jedoch der Einfachheit halber lediglich eine Skalierung der Lebenspunkte der Gegner umfasst.
+
+
+# Vorgehen
+
+## Technische Grundlagen erarbeiten
+

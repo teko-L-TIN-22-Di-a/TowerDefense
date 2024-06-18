@@ -14,11 +14,11 @@ public class KeyboardListener implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_A) {
-            gameStates = MENU;
+            gameState = MENU;
         } else if (e.getKeyCode() == KeyEvent.VK_S) {
-            gameStates = PLAYING;
+            gameState = PLAYING;
         } else if (e.getKeyCode() == KeyEvent.VK_D) {
-            gameStates = SETTINGS;
+            gameState = SETTINGS;
         }
     }
 
