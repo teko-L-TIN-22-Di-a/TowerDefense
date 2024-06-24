@@ -1,10 +1,6 @@
 package main;
 
-import maps.MapTile;
-
 import java.awt.*;
-import java.util.Arrays;
-import java.util.Random;
 
 public class Render {
     private Game game;

@@ -30,7 +30,6 @@ public class Game extends JFrame implements Runnable {
 
         pack();
         setVisible(true);
-
     }
 
     private void InitClasses() {
@@ -40,8 +39,6 @@ public class Game extends JFrame implements Runnable {
         playing = new Playing(this);
         settings = new Settings(this);
     }
-
-
 
     private void Start() {
         gameThread = new Thread(this);
@@ -56,7 +53,6 @@ public class Game extends JFrame implements Runnable {
         Game game = new Game();
         game.gamePanel.InitInputs();
         game.Start();
-
     }
 
     @Override
