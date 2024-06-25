@@ -1,33 +1,33 @@
 # ToDo Liste
 
-## T1 - Basis fertigstellen
+## ~~T1 - Basis fertigstellen~~
 
-- Limiter fertigstellen
-- Layout des Projektes umgestalten und diverse Vererbungen einbinden
+- ~~Limiter fertigstellen~~
+- ~~Layout des Projektes umgestalten und diverse Vererbungen einbinden~~
 
-## T2 - Scenes erstellen
+## ~~T2 - Scenes erstellen~~
 
-- Scene erstellen für den **Playing** State und diese Initialisieren
-- Generierung des Pfades nur bei der Initialisierung ausführen
-- Controller für die Initialisierung der Map sowie für den späteren Spielverlauf erstellen
-(**MapController** + **TileController**)
+- ~~Scene erstellen für den **Playing** State und diese Initialisieren~~
+- ~~Generierung des Pfades nur bei der Initialisierung ausführen~~
+- ~~Controller für die Initialisierung der Map sowie für den späteren Spielverlauf erstellen
+(**MapController** + **TileController**)~~
 
-## T3 - Custom Buttons für das Hauptmenü erstellen
+## ~~T3 - Custom Buttons für das Hauptmenü erstellen~~
 
-- Eigene Komponenten Library erstellen für die Erstellung von Buttons
-- Button **Play** erstellen und Funktionalität hinzufügen (Scene wechseln zu **Playing**)
-- Button **Exit** erstellen und Funktionalität hinzufügen (Programm beenden)
+- ~~Eigene Komponenten Library erstellen für die Erstellung von Buttons~~
+- ~~Button **Play** erstellen und Funktionalität hinzufügen (Scene wechseln zu **Playing**)~~
+- ~~Button **Exit** erstellen und Funktionalität hinzufügen (Programm beenden)~~
 
-## T4 - BottomBar einfügen
+## ~~T4 - BottomBar einfügen~~
 
-- Generierung des Pfades beschränken in der Höhe
-- Spielbereich einfügen für die Interaktion des Spielers
+- ~~Generierung des Pfades beschränken in der Höhe~~
+- ~~Spielbereich einfügen für die Interaktion des Spielers~~
 
-## T5 - BottomBar mit Buttons befüllen
+## ~~T5 - BottomBar mit Buttons befüllen~~
 
-- Platzhalter erstellen für die Karten in der BottomBar
-- Draw Funktion erstellen für erste Interaktion
-- **CardController** erstellen für die *Draw* Funktion
+- ~~Platzhalter erstellen für die Karten in der BottomBar~~
+- ~~Draw Funktion erstellen für erste Interaktion~~
+- ~~**CardController** erstellen für die *Draw* Funktion~~
 
 ## T5 - Gegner
 
