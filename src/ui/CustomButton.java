@@ -3,18 +3,32 @@ package ui;
 import java.awt.*;
 
 public class CustomButton {
-    public int x, y, width, height;
+    public int x, y, width, height, id;
     private String text;
     private Rectangle bounds;
     private boolean mousePressed = false;
     private boolean mouseHover = false;
 
+    // For normal Buttons
     public CustomButton(String text, int x, int y, int width, int height) {
         this.text = text;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.id = -1;
+
+        initBounds();
+    }
+
+    // For tile buttons
+    public CustomButton(String text, int x, int y, int width, int height, int id) {
+        this.text = text;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.id = id;
 
         initBounds();
     }
@@ -59,6 +73,13 @@ public class CustomButton {
 
     }
 
+    private void drawImage(Graphics g) {
+        int w = g.getFontMetrics().stringWidth(text);
+        int h = g.getFontMetrics().getHeight();
+        g.drawString(text, x - w / 2 + width / 2, y + h / 2 + height / 2);
+
+    }
+
     public void resetStates() {
         this.mouseHover = false;
         this.mousePressed = false;
@@ -82,5 +103,9 @@ public class CustomButton {
 
     public boolean isMousePressed() {
         return mousePressed;
+    }
+
+    public int getId() {
+        return id;
     }
 }

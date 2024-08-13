@@ -1,5 +1,6 @@
 package main;
 
+import helper.SpriteHelper;
 import inputs.CustomMouseListener;
 import inputs.KeyboardListener;
 import scenes.Menu;
@@ -7,6 +8,7 @@ import scenes.Playing;
 import scenes.Settings;
 
 import javax.swing.*;
+import java.io.InputStream;
 
 public class Game extends JFrame implements Runnable {
     private GamePanel gamePanel;

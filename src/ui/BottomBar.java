@@ -4,6 +4,7 @@ import scenes.Playing;
 import towers.Card;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class BottomBar {
@@ -32,25 +33,30 @@ public class BottomBar {
     private void drawHand() {
         int cardOffset = 20;
         int x = 120;
+        int id = 0;
 
         for (Card card : playing.getCardController().cardHand) {
-            cardButtonList.add(new CustomButton(card.getLabel(), x + cardOffset, 490, 100, 135));
+            cardButtonList.add(new CustomButton(card.getLabel(), x + cardOffset, 490, 100, 135, id));
             x = x + 100 + cardOffset;
+            id++;
         }
     }
 
     private void drawButtons(Graphics g) {
         bDraw.draw(g);
         for (CustomButton button : cardButtonList) {
-            button.draw(g);
-
-            if (button.isMouseOver()) {
-                g.setColor(Color.white);
-            } else {
-                g.setColor(Color.black);
-            }
-
-            g.drawRect(button.x, button.y, button.width, button.height);
+            g.setColor(Color.gray);
+            g.fillRect(button.x, button.y, button.width, button.height);
+            g.drawImage(playing.getTowerController().getTowerImgs()[button.getId()], button.x, button.y, button.width, button.height, null);
+//            button.draw(g);
+//
+//            if (button.isMouseOver()) {
+//                g.setColor(Color.white);
+//            } else {
+//                g.setColor(Color.black);
+//            }
+//
+//            g.drawRect(button.x, button.y, button.width, button.height);
         }
     }
 

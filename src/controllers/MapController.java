@@ -1,23 +1,28 @@
 package controllers;
 
+import helper.SpriteHelper;
 import maps.MapTile;
 import objects.TileType;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.Random;
 
 public class MapController {
 
+
     public MapController() {
     }
 
-    public static MapTile[][] createLevel() {
+    public static MapTile[][] createLevel(TileController tileController) {
         MapTile[][] mapGrid = new MapTile[20][15];
         Random random = new Random();
-        Color pathColor = new Color(0, 0, 0);
+//        Color pathColor = new Color(0, 0, 0);
 
-        Arrays.stream(mapGrid).forEach(a -> Arrays.fill(a, new MapTile(TileType.ENVIRONMENT)));
+        Arrays.stream(mapGrid).forEach(a -> {
+            Arrays.fill(a, tileController.getTile(0));
+        });
 
         var posY = random.nextInt(15);
         var previousY = posY;
@@ -28,16 +33,16 @@ public class MapController {
 
             if (previousY < posY) {
                 for (int currY = previousY; currY <= posY; currY++) {
-                    mapGrid[x][currY] = new MapTile(TileType.PATH);
+                    mapGrid[x][currY] = tileController.getTile(1);
                 }
                 previousY = posY;
             } else if (previousY > posY) {
                 for (int currY = previousY; currY >= posY; currY--) {
-                    mapGrid[x][currY] = new MapTile(TileType.PATH);
+                    mapGrid[x][currY] = tileController.getTile(1);
                 }
                 previousY = posY;
             } else {
-                mapGrid[x][posY] = new MapTile(TileType.PATH);
+                mapGrid[x][posY] = tileController.getTile(1);
             }
 
             if (x == lengthX) {
