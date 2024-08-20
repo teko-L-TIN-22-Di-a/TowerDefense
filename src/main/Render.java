@@ -18,9 +18,6 @@ public class Render {
             case PLAYING:
                 game.getPlaying().Render(g);
                 break;
-            case SETTINGS:
-                game.getSettings().Render(g);
-                break;
         }
     }
 
