@@ -1,42 +1,34 @@
 package maps;
 
-import objects.TileType;
-
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class MapTile {
-    public boolean filled;
-    public TileType type;
-    public Color background;
-
-    private BufferedImage sprite;
-    private int id;
-    private String name;
+    private BufferedImage[] sprite;
+    private int id, tileType;
 
 
-    public MapTile(BufferedImage sprite, int id, String name) {
+    public MapTile(BufferedImage sprite, int id, int tileType) {
+        this.sprite = new BufferedImage[1];
+        this.sprite[0] = sprite;
+        this.id = id;
+        this.tileType = tileType;
+    }
+
+    public MapTile(BufferedImage[] sprite, int id, int tileType) {
         this.sprite = sprite;
         this.id = id;
-        this.name = name;
+        this.tileType = tileType;
+    }
+
+    public int getTileType() {
+        return tileType;
     }
 
     public BufferedImage getSprite() {
-        return sprite;
+        return sprite[0];
     }
 
     public int getId() {
         return id;
     }
-
-    public String getName() {
-        return name;
-    }
-
-//    public MapTile(TileType type) {
-//        switch (type) {
-//            case ENVIRONMENT -> background = Color.white;
-//            case PATH -> background = Color.black;
-//        }
-//    }
 }

@@ -6,9 +6,11 @@ import maps.MapTile;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import static helper.Constants.Tiles.*;
+
 public class TileController {
     public MapTile GRASS, WATER, ROAD_X, ROAD_Y;
-    public BufferedImage  atlas;
+    public BufferedImage atlas;
     public ArrayList<MapTile> tileList = new ArrayList<>();
 
     public TileController() {
@@ -19,10 +21,10 @@ public class TileController {
 
     private void createTiles() {
         int id = 0;
-        tileList.add(GRASS = new MapTile(getSprite(9, 0), id++, "Grass"));
-        tileList.add(WATER = new MapTile(getSprite(0, 0), id++, "Water"));
-        tileList.add(ROAD_X = new MapTile(getSprite(8, 0), id++, "RoadX"));
-        tileList.add(ROAD_Y = new MapTile(getSprite(7, 0), id++, "RoadY"));
+        tileList.add(GRASS = new MapTile(getSprite(9, 0), id++, GRASS_TILE));
+        tileList.add(WATER = new MapTile(getSprite(0, 0), id++, WATER_TILE));
+        tileList.add(ROAD_X = new MapTile(getSprite(8, 0), id++, ROAD_TILE));
+        tileList.add(ROAD_Y = new MapTile(getSprite(7, 0), id++, ROAD_TILE));
     }
 
     private void loadTiles() {

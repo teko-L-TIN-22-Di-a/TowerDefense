@@ -11,6 +11,7 @@ import java.util.Random;
 
 public class MapController {
 
+    public static int startTile;
 
     public MapController() {
     }
@@ -24,35 +25,40 @@ public class MapController {
             Arrays.fill(a, tileController.getTile(0));
         });
 
-        var posY = random.nextInt(15);
+        var posY = random.nextInt(1,14);
+        startTile = posY;
         var previousY = posY;
         var lengthX = random.nextInt(2, 4);
         //map gen
         for (int x = 0; x < 20; x++) {
-            mapGrid[x][posY].filled = true;
 
+            //Draw path
             if (previousY < posY) {
                 for (int currY = previousY; currY <= posY; currY++) {
-                    mapGrid[x][currY] = tileController.getTile(1);
+                    mapGrid[x][currY] = tileController.getTile(2);
                 }
                 previousY = posY;
             } else if (previousY > posY) {
                 for (int currY = previousY; currY >= posY; currY--) {
-                    mapGrid[x][currY] = tileController.getTile(1);
+                    mapGrid[x][currY] = tileController.getTile(2);
                 }
                 previousY = posY;
             } else {
-                mapGrid[x][posY] = tileController.getTile(1);
+                mapGrid[x][posY] = tileController.getTile(2);
             }
 
             if (x == lengthX) {
                 while (posY == previousY) {
-                    posY = random.nextInt(15);
+                    posY = random.nextInt(1,14);
                 }
                 lengthX = random.nextInt(x + 2, x + 4);
             }
         }
 
         return mapGrid;
+    }
+
+    public static int getStartTile() {
+        return startTile;
     }
 }

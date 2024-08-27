@@ -1,14 +1,11 @@
 package main;
 
-import helper.SpriteHelper;
-import inputs.CustomMouseListener;
-import inputs.KeyboardListener;
+import controllers.TileController;
 import scenes.Menu;
 import scenes.Playing;
 import scenes.Settings;
 
 import javax.swing.*;
-import java.io.InputStream;
 
 public class Game extends JFrame implements Runnable {
     private GamePanel gamePanel;
@@ -23,6 +20,8 @@ public class Game extends JFrame implements Runnable {
     private Playing playing;
     private Settings settings;
 
+    private TileController tileController;
+
     public Game() {
         InitClasses();
         setResizable(false);
@@ -35,6 +34,7 @@ public class Game extends JFrame implements Runnable {
     }
 
     private void InitClasses() {
+        tileController = new TileController();
         render = new Render(this);
         gamePanel = new GamePanel(this);
         menu = new Menu(this);
@@ -119,5 +119,9 @@ public class Game extends JFrame implements Runnable {
 
     public Settings getSettings() {
         return settings;
+    }
+
+    public TileController getTileController() {
+        return tileController;
     }
 }

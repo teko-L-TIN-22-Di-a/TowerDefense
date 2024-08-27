@@ -7,13 +7,12 @@ import ui.BottomBar;
 
 import java.awt.*;
 
+import static controllers.MapController.startTile;
+
 public class Playing extends GameScene implements SceneMethods {
-    private boolean levelCreated = false;
-    private MapTile[][] lvl;
-    private TileController tileController;
-    private CardController cardController;
-    private TowerController towerController;
+    private MapTile[][] map;
     private EnemyController enemyController;
+    private CardController cardController;
 
     private int lastTileX, lastTileY;
     private int mouseX, mouseY;
@@ -27,53 +26,54 @@ public class Playing extends GameScene implements SceneMethods {
         super(game);
 
         tileController = new TileController();
-        cardController = new CardController();
-        towerController = new TowerController(this);
         enemyController = new EnemyController(this);
-        lvl = MapController.createLevel(tileController);
+        cardController = new CardController();
+        map = MapController.createLevel(tileController);
         bottomBar = new BottomBar(0, 480, 640, 160, this);
 
+        enemyController.addEnemy(0 * 32, startTile * 32);
     }
 
     public void update() {
         enemyController.update();
     }
 
+    public TileController getTileController() {
+        return tileController;
+    }
     public CardController getCardController() {
         return cardController;
     }
 
-    public TowerController getTowerController() {
-        return towerController;
-    }
-
-    public TileController getTileController() {
-        return tileController;
-    }
-
     @Override
     public void Render(Graphics g) {
-        for (int x = 0; x < lvl.length; x++) {
-            for (int y = 0; y < lvl[x].length; y++) {
-                MapTile currentTile = lvl[x][y];
-                g.drawImage(tileController.getSprite(currentTile.getId()), x * 32, y * 32, null);
-            }
-        }
 
+        drawMap(g);
         bottomBar.draw(g);
-        drawSelectedTile(g);
         enemyController.draw(g);
     }
 
-    public void setSelectedTile(MapTile tile) {
-        this.selectedTile = tile;
-        drawSelect = true;
+    public void drawMap(Graphics g) {
+        for (int x = 0; x < map.length; x++) {
+            for (int y = 0; y < map[x].length; y++) {
+                MapTile currentTile = map[x][y];
+                g.drawImage(tileController.getSprite(currentTile.getId()), x * 32, y * 32, null);
+            }
+        }
     }
 
-    private void drawSelectedTile(Graphics g) {
-        if (selectedTile != null && drawSelect) {
-            g.drawImage(selectedTile.getSprite(), mouseX, mouseY, 32, 32, null);
-        }
+    public int getTileType(int x, int y) {
+        int xCord = x / 32;
+        int yCord = y / 32;
+
+        if(xCord < 0 || xCord > 19)
+            return 0;
+        if(yCord < 0 || yCord > 14)
+            return 0;
+
+
+        int id = map[x / 32][y / 32].getId();
+        return game.getTileController().getTile(id).getTileType();
     }
 
     @Override
@@ -81,28 +81,9 @@ public class Playing extends GameScene implements SceneMethods {
         if (y >= 480) {
             bottomBar.mouseClicked(x, y);
         }
-        else {
-            enemyController.addEnemy(x, y);
-        }
-    }
-
-    private void changeTile(int x, int y) {
-        if (selectedTile != null) {
-
-            int tileX = x / 32;
-            int tileY = y / 32;
-
-            if (lastTileX == tileX
-                    && lastTileY == tileY
-                    && lastTileId == selectedTile.getId())
-                return;
-
-            lastTileX = tileX;
-            lastTileY = tileY;
-            lastTileId = selectedTile.getId();
-
-            lvl[tileX][tileY] = selectedTile;
-        }
+//        else {
+//            enemyController.addEnemy(x, y);
+//        }
     }
 
     @Override
@@ -121,18 +102,14 @@ public class Playing extends GameScene implements SceneMethods {
     public void mouseDragged(int x, int y) {
         if (y >= 480) {
             bottomBar.mouseClicked(x, y);
-        } else {
-            changeTile(x, y);
         }
     }
 
     @Override
     public void mouseMoved(int x, int y) {
         if (y >= 480) {
-            drawSelect = false;
             bottomBar.mouseMoved(x, y);
         } else {
-            drawSelect = true;
             mouseX = (x / 32) * 32;
             mouseY = (y / 32) * 32;
         }

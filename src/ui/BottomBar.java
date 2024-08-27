@@ -5,7 +5,6 @@ import scenes.Playing;
 import towers.Card;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class BottomBar {
@@ -62,7 +61,7 @@ public class BottomBar {
             g.setColor(Color.gray);
             g.fillRect(button.x, button.y, button.width, button.height);
 
-            g.drawImage(playing.getTowerController().getTowerImgs()[button.getId()], button.x, button.y, button.width, button.height, null);
+//            g.drawImage(playing.getTowerController().getTowerImgs()[button.getId()], button.x, button.y, button.width, button.height, null);
 
             if (button.isMouseOver()) {
                 g.setColor(Color.white);
@@ -94,7 +93,6 @@ public class BottomBar {
             for (CustomButton button : cardButtonList) {
                 if (button.getBounds().contains(x, y)) {
                     selectedTile = playing.getTileController().getTile(button.id);
-                    playing.setSelectedTile(selectedTile);
                     return;
                 }
             }
