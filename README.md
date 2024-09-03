@@ -6,8 +6,8 @@ In diesem Dokument werden die einzelnen Teile des gesamten Projektes gesammelt u
 |---|---|
 |[ToDo-Liste](ToDo.md)|Upcoming Tasks|
 |[Progress](PROGRESS.md)|Beschreibung des Projektverlaufs|
-|[Controller](./src/controllers/controller.md)|Übersicht aller Controller|
-|[Scenes](./src/scenes/scene.md)|Übersicht aller Views|
+|[Controller](src/main/java/controllers/controller.md)|Übersicht aller Controller|
+|[Scenes](src/main/java/scenes/scene.md)|Übersicht aller Views|
 |[Models](./models.md)|Übersicht aller Models|
 
 ## Spielmechaniken

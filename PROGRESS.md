@@ -2,11 +2,11 @@
 
 ## Einsteigspunkt
 
-In der **Game** Klasse werden die einzelnen Szenen, sowie das **GamePanel** und die **Render** Klasse initialisiert. Diese bekommen alle die Hauptklasse **Game** übergeben, um den momentanen State dessen zu teilen.
+In der **towerDefense.Game** Klasse werden die einzelnen Szenen, sowie das **towerDefense.GamePanel** und die **towerDefense.Render** Klasse initialisiert. Diese bekommen alle die Hauptklasse **towerDefense.Game** übergeben, um den momentanen State dessen zu teilen.
 
-## GamePanel erstellen
+## towerDefense.GamePanel erstellen
 
-Das **GamePanel** ist eine Abkapselung der Hauptklasse **Game** und erbt die Klasse **JPanel**.
+Das **towerDefense.GamePanel** ist eine Abkapselung der Hauptklasse **towerDefense.Game** und erbt die Klasse **JPanel**.
 
 Diese Klasse ist dafür zuständig, das Hauptpanel zu erstellen, die Listener für Maus und Tastatur Inputs zu generieren und den Renderer aufzurufen.
 
@@ -24,7 +24,7 @@ Sobald über den "Play" Button im Hauptmenü das Spiel gestartet wird, wechselt 
 
 ## Inputs in Gamepanel initialisieren wegen Bug der Position der Titelbar
 
-Position der MouseClicks waren nicht korrekt da die TitelBar des Fensters miteinbezogen wurde. Durch das verschieben der Initialisierung der MouseListener im **GamePanel** (da diese Klasse **JPanel** erbt), werden die Positionen korrekt nur innerhalb des Panels ausgelesen.
+Position der MouseClicks waren nicht korrekt da die TitelBar des Fensters miteinbezogen wurde. Durch das verschieben der Initialisierung der MouseListener im **towerDefense.GamePanel** (da diese Klasse **JPanel** erbt), werden die Positionen korrekt nur innerhalb des Panels ausgelesen.
 
 ## Bottombar als UI Component erstellen und anzeigen
 
