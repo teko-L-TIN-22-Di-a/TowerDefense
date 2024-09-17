@@ -1,57 +1,70 @@
 package towerDefense.controllers;
 
+import enemies.Bat;
+import enemies.Knight;
+import enemies.Orc;
+import enemies.Wolf;
+import objects.PathPoint;
 import towerDefense.enemies.BaseEnemy;
 import towerDefense.helper.SpriteHelper;
 import towerDefense.scenes.Playing;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static towerDefense.helper.Constants.Direction.*;
+import static towerDefense.helper.Constants.Enemies.*;
 import static towerDefense.helper.Constants.Tiles.*;
 
 public class EnemyController {
     private Playing playing;
     private BufferedImage[] enemyImgs;
     private ArrayList<BaseEnemy> enemies = new ArrayList<>();
-    private float speed = 0.5f;
+    private PathPoint start, end;
 
-    public EnemyController(Playing playing) {
+
+    public EnemyController(Playing playing, PathPoint start, PathPoint end) {
         this.playing = playing;
         enemyImgs = new BufferedImage[4];
+        this.start = start;
+        this.end = end;
+
+        addEnemy(ORC);
+        addEnemy(BAT);
+        addEnemy(KNIGHT);
+        addEnemy(WOLF);
+
         loadEnemyImgs();
     }
 
     private void loadEnemyImgs() {
         BufferedImage atlas = SpriteHelper.getSpriteAtlas();
-        enemyImgs[0] = atlas.getSubimage(0, 32, 32, 32);
-        enemyImgs[1] = atlas.getSubimage(32, 32, 32, 32);
-        enemyImgs[2] = atlas.getSubimage(2 * 32, 32, 32, 32);
-        enemyImgs[3] = atlas.getSubimage(3 * 32, 32, 32, 32);
-    }
-
-    public void update() {
-        for (BaseEnemy e : enemies) {
-            if (isNextTileRoad(e)) {
-
-            }
+        for(int i = 0; i < 4; ++i) {
+            this.enemyImgs[i] = atlas.getSubimage(i * 32, 32, 32, 32);
         }
     }
 
-    public boolean isNextTileRoad(BaseEnemy e) {
-        int newX = (int) (e.getX() + getSpeedAndWidth(e.getLastDir()));
-        int newY = (int) (e.getY() + getSpeedAndHeight(e.getLastDir()));
+    public void update() {
+        for (BaseEnemy e : enemies)
+            updateEnemyMove(e);
+    }
+
+    public void updateEnemyMove(BaseEnemy e) {
+        if (e.getLastDir() == -1)
+            setNewDirectionAndMove(e);
+
+        int newX = (int) (e.getX() + getSpeedAndWidth(e.getLastDir(), e.getEnemyType()));
+        int newY = (int) (e.getY() + getSpeedAndHeight(e.getLastDir(), e.getEnemyType()));
 
         if (getTileType(newX, newY) == ROAD_TILE) {
-            e.move(speed, e.getLastDir());
+            e.move(GetSpeed(e.getEnemyType()), e.getLastDir());
         } else if (isAtEnd(e)) {
+            System.out.println("Lives Lost!");
 
         } else {
             setNewDirectionAndMove(e);
         }
-        return false;
     }
 
     private void setNewDirectionAndMove(BaseEnemy e) {
@@ -63,17 +76,17 @@ public class EnemyController {
         fixEnemyOffsetTile(e, dir, xCord, yCord);
 
         if (dir == LEFT || dir == RIGHT) {
-            int newY = (int) (e.getY() + getSpeedAndHeight(UP));
+            int newY = (int) (e.getY() + getSpeedAndHeight(UP, e.getEnemyType()));
             if (getTileType((int) e.getX(), newY) == ROAD_TILE)
-                e.move(speed, UP);
+                e.move(GetSpeed(e.getEnemyType()), UP);
             else
-                e.move(speed, DOWN);
+                e.move(GetSpeed(e.getEnemyType()), DOWN);
         } else {
-            int newX = (int) (e.getX() + getSpeedAndWidth(RIGHT));
+            int newX = (int) (e.getX() + getSpeedAndWidth(RIGHT, e.getEnemyType()));
             if (getTileType(newX, (int) e.getY()) == ROAD_TILE)
-                e.move(speed, RIGHT);
+                e.move(GetSpeed(e.getEnemyType()), RIGHT);
             else
-                e.move(speed, LEFT);
+                e.move(GetSpeed(e.getEnemyType()), LEFT);
 
         }
     }
@@ -95,6 +108,9 @@ public class EnemyController {
     }
 
     private boolean isAtEnd(BaseEnemy e) {
+        if (e.getX() == end.getxCord() * 32)
+            if (((int) e.getY()) == end.getyCord() * 32)
+                return true;
         return false;
     }
 
@@ -102,26 +118,41 @@ public class EnemyController {
         return playing.getTileType(x, y);
     }
 
-    private float getSpeedAndHeight(int dir) {
+    private float getSpeedAndHeight(int dir, int enemyType) {
         if (dir == UP)
-            return -speed;
+            return -GetSpeed(enemyType);
         else if (dir == DOWN)
-            return speed + 32;
+            return GetSpeed(enemyType) + 32;
 
         return 0;
     }
 
-    private float getSpeedAndWidth(int dir) {
+    private float getSpeedAndWidth(int dir, int enemyType) {
         if (dir == LEFT)
-            return -speed;
+            return -GetSpeed(enemyType);
         else if (dir == RIGHT)
-            return speed + 32;
+            return GetSpeed(enemyType) + 32;
 
         return 0;
     }
 
-    public void addEnemy(int x, int y) {
-        enemies.add(new BaseEnemy(x, y, 0, 0));
+    public void addEnemy(int enemyType) {
+        int x = this.start.getxCord() * 32;
+        int y = this.start.getyCord() * 32;
+        switch (enemyType) {
+            case 0:
+                this.enemies.add(new Orc((float)x, (float)y, 0));
+                break;
+            case 1:
+                this.enemies.add(new Bat((float)x, (float)y, 0));
+                break;
+            case 2:
+                this.enemies.add(new Knight((float)x, (float)y, 0));
+                break;
+            case 3:
+                this.enemies.add(new Wolf((float)x, (float)y, 0));
+        }
+
     }
 
     public void draw(Graphics g) {
@@ -131,6 +162,6 @@ public class EnemyController {
     }
 
     private void drawEnemy(BaseEnemy e, Graphics g) {
-        g.drawImage(enemyImgs[0], (int) e.getX(), (int) e.getY(), null);
+        g.drawImage(this.enemyImgs[e.getEnemyType()], (int)e.getX(), (int)e.getY(), null);
     }
 }

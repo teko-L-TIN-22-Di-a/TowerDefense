@@ -2,6 +2,7 @@ package towerDefense.ui;
 
 import towerDefense.maps.MapTile;
 import towerDefense.scenes.Playing;
+import towerDefense.towers.BaseTower;
 import towerDefense.towers.Card;
 
 import java.awt.*;
@@ -13,7 +14,7 @@ public class BottomBar {
     private ArrayList<CustomButton> cardButtonList = new ArrayList<>();
     private CustomButton bDraw;
     private Playing playing;
-    private MapTile selectedTile;
+    private BaseTower selectedTower;
 
     public BottomBar(int x, int y, int width, int height, Playing playing) {
         this.x = x;
@@ -46,22 +47,22 @@ public class BottomBar {
     private void drawButtons(Graphics g) {
         bDraw.draw(g);
         drawCardButtons(g);
-        drawSelectedTower(g);
+//        drawSelectedTower(g);
 
     }
 
-    private void drawSelectedTower(Graphics g) {
-        if (selectedTile != null) {
-            g.drawImage(selectedTile.getSprite(), 500, 500, 50, 50, null);
-        }
-    }
+//    private void drawSelectedTower(Graphics g) {
+//        if (selectedTower != null) {
+//            g.drawImage(selectedTower.getSprite(), 500, 500, 50, 50, null);
+//        }
+//    }
 
     private void drawCardButtons(Graphics g) {
         for (CustomButton button : cardButtonList) {
             g.setColor(Color.gray);
             g.fillRect(button.x, button.y, button.width, button.height);
 
-//            g.drawImage(playing.getTowerController().getTowerImgs()[button.getId()], button.x, button.y, button.width, button.height, null);
+             g.drawImage(playing.getTowerController().getTowerImgs()[button.getId()], button.x, button.y, button.width, button.height, null);
 
             if (button.isMouseOver()) {
                 g.setColor(Color.white);
@@ -91,8 +92,9 @@ public class BottomBar {
             drawHand();
         } else {
             for (CustomButton button : cardButtonList) {
-                if (button.getBounds().contains(x, y)) {
-                    selectedTile = playing.getTileController().getTile(button.id);
+                if(button.getBounds().contains(x, y)) {
+                    selectedTower = new BaseTower(0,0,-1,button.getId());
+                    playing.setSelectedTower(selectedTower);
                     return;
                 }
             }

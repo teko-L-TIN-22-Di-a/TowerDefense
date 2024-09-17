@@ -1,5 +1,6 @@
 package towerDefense.controllers;
 
+import objects.PathPoint;
 import towerDefense.maps.MapTile;
 
 import java.util.Arrays;
@@ -7,7 +8,7 @@ import java.util.Random;
 
 public class MapController {
 
-    public static int startTile;
+    public static objects.PathPoint startTile, endTile;
 
     public MapController() {
     }
@@ -21,8 +22,8 @@ public class MapController {
             Arrays.fill(a, tileController.getTile(0));
         });
 
-        var posY = random.nextInt(1,14);
-        startTile = posY;
+        var posY = random.nextInt(1, 14);
+        startTile = new objects.PathPoint(0, posY);
         var previousY = posY;
         var lengthX = random.nextInt(2, 4);
         //map gen
@@ -45,16 +46,24 @@ public class MapController {
 
             if (x == lengthX) {
                 while (posY == previousY) {
-                    posY = random.nextInt(1,14);
+                    posY = random.nextInt(1, 14);
                 }
                 lengthX = random.nextInt(x + 2, x + 4);
+            }
+
+            if (x == 19) {
+                endTile = new objects.PathPoint(19, previousY);
             }
         }
 
         return mapGrid;
     }
 
-    public static int getStartTile() {
+    public static PathPoint getStartTile() {
         return startTile;
+    }
+
+    public static PathPoint getEndTile() {
+        return endTile;
     }
 }
