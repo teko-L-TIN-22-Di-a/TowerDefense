@@ -32,16 +32,16 @@ public class MapController {
             //Draw path
             if (previousY < posY) {
                 for (int currY = previousY; currY <= posY; currY++) {
-                    mapGrid[x][currY] = tileController.getTile(2);
+                    mapGrid[x][currY] = tileController.getTile(1);
                 }
                 previousY = posY;
             } else if (previousY > posY) {
                 for (int currY = previousY; currY >= posY; currY--) {
-                    mapGrid[x][currY] = tileController.getTile(2);
+                    mapGrid[x][currY] = tileController.getTile(1);
                 }
                 previousY = posY;
             } else {
-                mapGrid[x][posY] = tileController.getTile(2);
+                mapGrid[x][posY] = tileController.getTile(1);
             }
 
             if (x == lengthX) {

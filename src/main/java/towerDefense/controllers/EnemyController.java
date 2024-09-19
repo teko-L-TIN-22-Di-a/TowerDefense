@@ -1,9 +1,9 @@
 package towerDefense.controllers;
 
-import enemies.Bat;
-import enemies.Knight;
-import enemies.Orc;
-import enemies.Wolf;
+import towerDefense.enemies.Bat;
+import towerDefense.enemies.Knight;
+import towerDefense.enemies.Orc;
+import towerDefense.enemies.Wolf;
 import objects.PathPoint;
 import towerDefense.enemies.BaseEnemy;
 import towerDefense.helper.SpriteHelper;
@@ -22,7 +22,7 @@ public class EnemyController {
     private BufferedImage[] enemyImgs;
     private ArrayList<BaseEnemy> enemies = new ArrayList<>();
     private PathPoint start, end;
-
+    private int HPbarWidth = 20;
 
     public EnemyController(Playing playing, PathPoint start, PathPoint end) {
         this.playing = playing;
@@ -30,18 +30,13 @@ public class EnemyController {
         this.start = start;
         this.end = end;
 
-        addEnemy(ORC);
-        addEnemy(BAT);
-        addEnemy(KNIGHT);
-        addEnemy(WOLF);
-
         loadEnemyImgs();
     }
 
     private void loadEnemyImgs() {
         BufferedImage atlas = SpriteHelper.getSpriteAtlas();
         for(int i = 0; i < 4; ++i) {
-            this.enemyImgs[i] = atlas.getSubimage(i * 32, 32, 32, 32);
+            this.enemyImgs[i] = atlas.getSubimage((10 + i) * 32, 0, 32, 32);
         }
     }
 
@@ -91,6 +86,15 @@ public class EnemyController {
         }
     }
 
+    public int getAmountOfAliveEnemies() {
+        int size = 0;
+        for (BaseEnemy e : enemies)
+            if (e.isAlive())
+                size++;
+
+        return size;
+    }
+
     private void fixEnemyOffsetTile(BaseEnemy e, int dir, int xCord, int yCord) {
         switch (dir) {
             case RIGHT:
@@ -136,6 +140,10 @@ public class EnemyController {
         return 0;
     }
 
+    public void spawnEnemy(int nextEnemy) {
+        addEnemy(nextEnemy);
+    }
+
     public void addEnemy(int enemyType) {
         int x = this.start.getxCord() * 32;
         int y = this.start.getyCord() * 32;
@@ -156,12 +164,30 @@ public class EnemyController {
     }
 
     public void draw(Graphics g) {
-        for (BaseEnemy e : enemies)
-            drawEnemy(e, g);
-
+        for (BaseEnemy e : enemies) {
+            if (e.isAlive()) {
+                drawEnemy(e, g);
+                drawHealthBar(e, g);
+            }
+        }
     }
+
+
+    private void drawHealthBar(BaseEnemy e, Graphics g) {
+        g.setColor(Color.red);
+        g.fillRect((int) e.getX() + 16 - (getNewBarWidth(e) / 2), (int) e.getY() - 10, getNewBarWidth(e), 3);
+    }
+
+    private int getNewBarWidth(BaseEnemy e) {
+        return (int) (HPbarWidth * e.getHealthBarFloat());
+    }
+
 
     private void drawEnemy(BaseEnemy e, Graphics g) {
         g.drawImage(this.enemyImgs[e.getEnemyType()], (int)e.getX(), (int)e.getY(), null);
+    }
+
+    public ArrayList<BaseEnemy> getEnemies() {
+        return enemies;
     }
 }

@@ -1,17 +1,23 @@
 package towerDefense.enemies;
 
+import towerDefense.helper.Constants;
+
 import java.awt.*;
 
 import static towerDefense.helper.Constants.Direction.*;
 
 public class BaseEnemy {
 
-    private float x, y;
-    private Rectangle bounds;
-    private int health;
-    private int Id;
-    private int enemyType;
-    private int lastDir;
+    protected float x, y;
+    protected Rectangle bounds;
+    protected int health;
+    protected int maxHealth;
+    protected int Id;
+    protected int enemyType;
+    protected int lastDir;
+    protected boolean alive = true;
+    protected int slowTickLimit = 120;
+    protected int slowTick = slowTickLimit;
 
     public BaseEnemy(float x, float y, int id, int enemyType) {
         this.x = x;
@@ -20,10 +26,32 @@ public class BaseEnemy {
         this.enemyType = enemyType;
         bounds = new Rectangle((int) x, (int) y, 32, 32);
         lastDir = RIGHT;
+        setStartHealth();
+    }
+
+    private void setStartHealth() {
+        health =  Constants.Enemies.GetStartHealth(enemyType);
+        maxHealth = health;
+    }
+
+    public void hurt(int dmg) {
+        this.health -= dmg;
+        if (health <= 0)
+            alive = false;
+    }
+
+    public float getHealthBarFloat() {
+        return health / (float) maxHealth;
     }
 
     public void move(float speed, int dir) {
         lastDir = dir;
+
+        if (slowTick < slowTickLimit) {
+            slowTick++;
+            speed *= 0.5f;
+        }
+
         switch (dir) {
             case LEFT:
                 this.x -= speed;
@@ -38,8 +66,18 @@ public class BaseEnemy {
                 this.y += speed;
                 break;
         }
+        updateHitbox();
     }
 
+    public void slow() {
+        slowTick = 0;
+    }
+
+    private void updateHitbox() {
+        bounds.x = (int) x;
+        bounds.y = (int) y;
+    }
+    
     public void setPos(int x, int y) {
         // Don't use this one for moving the enemy.
         this.x = x;
@@ -72,5 +110,9 @@ public class BaseEnemy {
 
     public int getLastDir() {
         return lastDir;
+    }
+
+    public boolean isAlive() {
+        return alive;
     }
 }

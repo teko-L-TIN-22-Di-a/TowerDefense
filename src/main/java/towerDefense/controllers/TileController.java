@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static towerDefense.helper.Constants.Tiles.*;
 
 public class TileController {
-    public MapTile GRASS, WATER, ROAD_X, ROAD_Y;
+    public MapTile GRASS, ROAD;
     public BufferedImage atlas;
     public ArrayList<MapTile> tileList = new ArrayList<>();
 
@@ -21,10 +21,8 @@ public class TileController {
 
     private void createTiles() {
         int id = 0;
-        tileList.add(GRASS = new MapTile(getSprite(9, 0), id++, GRASS_TILE));
-        tileList.add(WATER = new MapTile(getSprite(0, 0), id++, WATER_TILE));
-        tileList.add(ROAD_X = new MapTile(getSprite(8, 0), id++, ROAD_TILE));
-        tileList.add(ROAD_Y = new MapTile(getSprite(7, 0), id++, ROAD_TILE));
+        tileList.add(GRASS = new MapTile(getSprite(2, 0), id++, GRASS_TILE));
+        tileList.add(ROAD = new MapTile(getSprite(3, 0), id++, ROAD_TILE));
     }
 
     private void loadTiles() {

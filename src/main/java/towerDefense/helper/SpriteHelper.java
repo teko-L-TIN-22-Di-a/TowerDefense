@@ -12,7 +12,7 @@ public class SpriteHelper {
     public static BufferedImage getSpriteAtlas() {
         BufferedImage img = null;
 //        InputStream is = SpriteHelper.class.getClassLoader().getResourceAsStream("src/main/java/towerDefense/res/spriteatlas.png");
-        InputStream is = SpriteHelper.class.getResourceAsStream("/spritesheet/spriteatlas.png");
+        InputStream is = SpriteHelper.class.getResourceAsStream("/spritesheet/edited.png");
 
         try {
             img = ImageIO.read(is);

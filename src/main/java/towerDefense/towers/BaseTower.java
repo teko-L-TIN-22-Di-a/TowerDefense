@@ -1,5 +1,7 @@
 package towerDefense.towers;
 
+import towerDefense.helper.Constants;
+
 import static towerDefense.helper.Constants.Towers.*;
 
 public class BaseTower {
@@ -13,9 +15,21 @@ public class BaseTower {
         this.id = id;
         this.towerType = towerType;
         tier = 1;
-//        setDefaultDmg();
-//        setDefaultRange();
-//        setDefaultCooldown();
+        setDefaultDmg();
+        setDefaultRange();
+        setDefaultCooldown();
+    }
+
+    private void setDefaultCooldown() {
+        cooldown = Constants.Towers.GetDefaultCooldown(towerType);
+    }
+
+    private void setDefaultRange() {
+        range = Constants.Towers.GetDefaultRange(towerType);
+    }
+
+    private void setDefaultDmg() {
+        dmg = Constants.Towers.GetStartDmg(towerType);
     }
 
     public void update() {
