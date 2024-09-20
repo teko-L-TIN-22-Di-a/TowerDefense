@@ -1,6 +1,7 @@
 package towerDefense;
 
 import towerDefense.controllers.TileController;
+import towerDefense.scenes.GameOver;
 import towerDefense.scenes.Menu;
 import towerDefense.scenes.Playing;
 import towerDefense.scenes.Settings;
@@ -11,7 +12,7 @@ public class Game extends JFrame implements Runnable {
     private GamePanel gamePanel;
     private Thread gameThread;
 
-    private final double FPS_SET = 120.0;
+    private final double FPS_SET = 60.0;
     private final double UPS_SET = 60.0;
 
     //Classes
@@ -19,6 +20,7 @@ public class Game extends JFrame implements Runnable {
     private Menu menu;
     private Playing playing;
     private Settings settings;
+    private GameOver gameOver;
 
     private TileController tileController;
 
@@ -40,6 +42,7 @@ public class Game extends JFrame implements Runnable {
         menu = new Menu(this);
         playing = new Playing(this);
         settings = new Settings(this);
+        gameOver = new GameOver(this);
     }
 
     private void Start() {
@@ -117,8 +120,8 @@ public class Game extends JFrame implements Runnable {
         return playing;
     }
 
-    public Settings getSettings() {
-        return settings;
+    public GameOver getGameOver() {
+        return gameOver;
     }
 
     public TileController getTileController() {

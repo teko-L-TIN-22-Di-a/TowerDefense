@@ -18,6 +18,9 @@ public class Render {
             case PLAYING:
                 game.getPlaying().Render(g);
                 break;
+            case GAME_OVER:
+                game.getGameOver().Render(g);
+                break;
         }
     }
 

@@ -40,6 +40,11 @@ public class BaseEnemy {
             alive = false;
     }
 
+    public void reachedEnd() {
+        alive = false;
+        health = 0;
+    }
+
     public float getHealthBarFloat() {
         return health / (float) maxHealth;
     }

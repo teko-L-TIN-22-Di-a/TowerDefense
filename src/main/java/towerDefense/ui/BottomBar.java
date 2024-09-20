@@ -11,6 +11,9 @@ import java.awt.image.ImageObserver;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import static towerDefense.GameStates.GAME_OVER;
+import static towerDefense.GameStates.SetGameState;
+
 public class BottomBar {
     private int x, y, width, height;
 
@@ -34,6 +37,13 @@ public class BottomBar {
         initButtons();
     }
 
+    public void removeLife() {
+        lives--;
+        if(lives <= 0) {
+            SetGameState(GAME_OVER);
+        }
+    }
+
     private void initButtons() {
         bDraw = new CustomButton("Draw", 2, 490, 80, 40);
 
@@ -49,17 +59,11 @@ public class BottomBar {
         // Wave info
         drawWaveInfo(g);
 
-        // Gold info
-        drawGoldAmount(g);
-
         // Lives
         g.setColor(Color.black);
-        g.drawString("Lives: " + lives, 110, 750);
+        g.drawString("Lives: " + lives, 425, 550);
     }
 
-    private void drawGoldAmount(Graphics g) {
-        g.drawString("Gold: " + gold + "g", 110, 725);
-    }
 
     private void drawWaveInfo(Graphics g) {
         g.setColor(Color.black);
@@ -86,19 +90,18 @@ public class BottomBar {
 
             float timeLeft = playing.getWaveController().getTimeLeft();
             String formattedText = formatter.format(timeLeft);
-            g.drawString("Time Left: " + formattedText, 425, 550);
+            g.drawString("Time Left: " + formattedText, 425, 570);
         }
     }
 
     private void drawHand() {
         int cardOffset = 20;
         int x = 100;
-        int id = 0;
+        cardButtonList = new ArrayList<>();
 
-        for (Card card : playing.getCardController().cardHand) {
-            cardButtonList.add(new CustomButton(card.getLabel(), x + cardOffset, 490, 50, 50, id));
+        for (int cardId : playing.getCardController().cardHand) {
+            cardButtonList.add(new CustomButton("", x + cardOffset, 490, 50, 50, cardId));
             x = x + 50 + cardOffset;
-            id++;
         }
     }
 
@@ -106,6 +109,12 @@ public class BottomBar {
         bDraw.draw(g);
         drawCardButtons(g);
         drawInfoBoxTowerTower(g);
+    }
+
+    public void resetEverything() {
+        lives = 25;
+        selectedTower = null;
+        infoBoxTower = null;
     }
 
     private void drawInfoBoxTowerTower(Graphics g) {

@@ -1,7 +1,7 @@
 package towerDefense;
 
 public enum GameStates {
-    PLAYING, MENU;
+    PLAYING, MENU, GAME_OVER;
 
     public static GameStates gameState = MENU;
 

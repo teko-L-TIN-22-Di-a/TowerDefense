@@ -97,14 +97,14 @@ public class Constants {
 
     public static class Enemies {
 
-        public static final int ORC = 0;
+        public static final int SLIME = 0;
         public static final int BAT = 1;
         public static final int KNIGHT = 2;
         public static final int WOLF = 3;
 
         public static int GetReward(int enemyType) {
             switch (enemyType) {
-                case ORC:
+                case SLIME:
                     return 5;
                 case BAT:
                     return 5;
@@ -118,8 +118,8 @@ public class Constants {
 
         public static float GetSpeed(int enemyType) {
             switch (enemyType) {
-                case ORC:
-                    return 0.5f;
+                case SLIME:
+                    return 2.5f;
                 case BAT:
                     return 0.7f;
                 case KNIGHT:
@@ -132,7 +132,7 @@ public class Constants {
 
         public static int GetStartHealth(int enemyType) {
             switch (enemyType) {
-                case ORC:
+                case SLIME:
                     return 85;
                 case BAT:
                     return 100;
@@ -146,7 +146,6 @@ public class Constants {
     }
 
     public static class Tiles {
-        public static final int WATER_TILE = 0;
         public static final int GRASS_TILE = 1;
         public static final int ROAD_TILE = 2;
     }

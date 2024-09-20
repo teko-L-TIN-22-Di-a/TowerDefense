@@ -10,7 +10,6 @@ import towerDefense.ui.BottomBar;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-import static towerDefense.controllers.MapController.startTile;
 import static towerDefense.helper.Constants.Tiles.GRASS_TILE;
 
 public class Playing extends GameScene implements SceneMethods {
@@ -69,6 +68,10 @@ public class Playing extends GameScene implements SceneMethods {
         enemyController.spawnEnemy(waveController.getNextEnemy());
     }
 
+    public void removeLife() {
+        bottomBar.removeLife();
+    }
+
     private boolean isTimeForNewEnemy() {
         if (waveController.isTimeForNewEnemy()) {
             if (waveController.isThereMoreEnemiesInWave())
@@ -94,11 +97,6 @@ public class Playing extends GameScene implements SceneMethods {
                 return false;
 
         return true;
-    }
-
-
-    public TileController getTileController() {
-        return tileController;
     }
 
     public CardController getCardController() {
@@ -223,11 +221,26 @@ public class Playing extends GameScene implements SceneMethods {
     public TowerController getTowerController() {
         return towerController;
     }
-
     public EnemyController getEnemyController() {
         return enemyController;
     }
     public WaveController getWaveController() {
         return waveController;
+    }
+
+    public void resetEverything() {
+
+        bottomBar.resetEverything();
+
+        // managers
+        enemyController.reset();
+        towerController.reset();
+        projectileController.reset();
+        waveController.reset();
+
+        mouseX = 0;
+        mouseY = 0;
+
+        selectedTower = null;
     }
 }

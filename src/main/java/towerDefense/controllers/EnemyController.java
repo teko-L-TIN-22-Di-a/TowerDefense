@@ -2,7 +2,7 @@ package towerDefense.controllers;
 
 import towerDefense.enemies.Bat;
 import towerDefense.enemies.Knight;
-import towerDefense.enemies.Orc;
+import towerDefense.enemies.Slime;
 import towerDefense.enemies.Wolf;
 import objects.PathPoint;
 import towerDefense.enemies.BaseEnemy;
@@ -42,7 +42,8 @@ public class EnemyController {
 
     public void update() {
         for (BaseEnemy e : enemies)
-            updateEnemyMove(e);
+            if (e.isAlive())
+                updateEnemyMove(e);
     }
 
     public void updateEnemyMove(BaseEnemy e) {
@@ -55,8 +56,8 @@ public class EnemyController {
         if (getTileType(newX, newY) == ROAD_TILE) {
             e.move(GetSpeed(e.getEnemyType()), e.getLastDir());
         } else if (isAtEnd(e)) {
-            System.out.println("Lives Lost!");
-
+            e.reachedEnd();
+            playing.removeLife();
         } else {
             setNewDirectionAndMove(e);
         }
@@ -69,6 +70,9 @@ public class EnemyController {
         int yCord = (int) (e.getY() / 32);
 
         fixEnemyOffsetTile(e, dir, xCord, yCord);
+
+        if (isAtEnd(e))
+            return;
 
         if (dir == LEFT || dir == RIGHT) {
             int newY = (int) (e.getY() + getSpeedAndHeight(UP, e.getEnemyType()));
@@ -113,7 +117,7 @@ public class EnemyController {
 
     private boolean isAtEnd(BaseEnemy e) {
         if (e.getX() == end.getxCord() * 32)
-            if (((int) e.getY()) == end.getyCord() * 32)
+            if (e.getY() == end.getyCord() * 32)
                 return true;
         return false;
     }
@@ -149,16 +153,16 @@ public class EnemyController {
         int y = this.start.getyCord() * 32;
         switch (enemyType) {
             case 0:
-                this.enemies.add(new Orc((float)x, (float)y, 0));
+                this.enemies.add(new Slime(x, y, 0));
                 break;
             case 1:
-                this.enemies.add(new Bat((float)x, (float)y, 0));
+                this.enemies.add(new Bat(x, y, 0));
                 break;
             case 2:
-                this.enemies.add(new Knight((float)x, (float)y, 0));
+                this.enemies.add(new Knight(x, y, 0));
                 break;
             case 3:
-                this.enemies.add(new Wolf((float)x, (float)y, 0));
+                this.enemies.add(new Wolf(x, y, 0));
         }
 
     }
@@ -189,5 +193,9 @@ public class EnemyController {
 
     public ArrayList<BaseEnemy> getEnemies() {
         return enemies;
+    }
+
+    public void reset() {
+        enemies.clear();
     }
 }
