@@ -2,15 +2,15 @@
 
 In diesem Dokument werden die einzelnen Teile des gesamten Projektes gesammelt und beschrieben.
 
-| Dokumentation                                         | Beschreibung                     |
-|-------------------------------------------------------|----------------------------------|
-| [ToDo-Liste](ToDo.md)                                 | Upcoming Tasks                   |
-| [Progress](PROGRESS.md)                               | Beschreibung des Projektverlaufs |
-| [Controller](src/main/java/controllers/controller.md) | Übersicht aller Controller       |
-| [Scenes](src/main/java/scenes/scene.md)               | Übersicht aller Views            |
-| [Models](./models.md)                                 | Übersicht aller Models           |
-| [UI](./ui.md)                                         | Übersicht aller UI Klassen       |
-| [helpers](./helpers.md)                               | Übersicht aller Helper Klasse    |
+| Dokumentation                  | Beschreibung                     |
+|--------------------------------|----------------------------------|
+| [ToDo-Liste](ToDo.md)          | Upcoming Tasks                   |
+| [Progress](PROGRESS.md)        | Beschreibung des Projektverlaufs |
+| [Controller](./controller.md)  | Übersicht aller Controller       |
+| [Scenes](./scene.md)           | Übersicht aller Views            |
+| [Models](./models.md)          | Übersicht aller Models           |
+| [UI](./ui.md)                  | Übersicht aller UI Klassen       |
+| [helpers](./helpers.md)        | Übersicht aller Helper Klasse    |
 
 ## Spielmechaniken
 
