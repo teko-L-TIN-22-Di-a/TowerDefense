@@ -31,25 +31,25 @@
 
 ## T5 - Gegner
 
-- ~~Klasse für Gegner erstellen und deren Attribute
-- ~~Controller für die Interaktion mit den Gegnern
-- ~~Zeichnen der Formen für die Gegner. Geplant sind Geometrische Formen, mit unterschiedlichen Farben für unterschiedliche Attribute
+- ~~Klasse für Gegner erstellen und deren Attribute~~
+- ~~Controller für die Interaktion mit den Gegnern~~
+- ~~Zeichnen der Formen für die Gegner. Geplant sind Geometrische Formen, mit unterschiedlichen Farben für unterschiedliche Attribute~~
   - Gelb - schnelle Gegner
   - Rot - Viele Lebenspunkte
   - Blau - Teilt sich in kleinere Gegner
-  - *MIT SPRITES UMGESETZT NEU*
-- ~~Gegner generieren auf der Playing-Scene
-- ~~Bewegung auf dem generierten Pfad
+  - **MIT SPRITES UMGESETZT NEU**
+- ~~Gegner generieren auf der Playing-Scene~~
+- ~~Bewegung auf dem generierten Pfad~~
 
 ## T6 - Tower
 
-- ~~Klasse für Tower erstellen
-- ~~Controller für das Bauen, Aufwerten und Verkaufen von Towern
-- ~~Attribute der Tower zuweisen und auslesen
-- T~~ower platzieren auf dem Grid über MouseListener mithilfe des **TileController**
+- ~~Klasse für Tower erstellen~~
+- ~~Controller für das Bauen, Aufwerten und Verkaufen von Towern~~
+- ~~Attribute der Tower zuweisen und auslesen~~
+- T~~ower platzieren auf dem Grid über MouseListener mithilfe des **TileController**~~
 
 ## T7 - Gameplay
 
-- ~~Anvisieren von Towern auf Gegner
-- ~~Interaktion zwischen Tower und Gegner (Schadensberechnung)
-- ~~Sieg und Niederlage implementieren (Leben werden abgezogen, sobald Gegner das Ende berühren. Keine Gegner mehr vorhanden = Sieg)
+- ~~Anvisieren von Towern auf Gegner~~
+- ~~Interaktion zwischen Tower und Gegner (Schadensberechnung)~~
+- ~~Sieg und Niederlage implementieren (Leben werden abgezogen, sobald Gegner das Ende berühren. Keine Gegner mehr vorhanden = Sieg)~~
