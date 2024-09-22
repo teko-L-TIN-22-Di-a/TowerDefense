@@ -99,8 +99,8 @@ public class Constants {
 
         public static final int SLIME = 0;
         public static final int BAT = 1;
-        public static final int KNIGHT = 2;
-        public static final int WOLF = 3;
+        public static final int SNAKE = 2;
+        public static final int TURTLE = 3;
 
         public static int GetReward(int enemyType) {
             switch (enemyType) {
@@ -108,9 +108,9 @@ public class Constants {
                     return 5;
                 case BAT:
                     return 5;
-                case KNIGHT:
+                case SNAKE:
                     return 25;
-                case WOLF:
+                case TURTLE:
                     return 10;
             }
             return 0;
@@ -119,13 +119,13 @@ public class Constants {
         public static float GetSpeed(int enemyType) {
             switch (enemyType) {
                 case SLIME:
-                    return 2.5f;
+                    return 0.5f;
                 case BAT:
                     return 0.7f;
-                case KNIGHT:
-                    return 0.45f;
-                case WOLF:
+                case SNAKE:
                     return 0.85f;
+                case TURTLE:
+                    return 0.3f;
             }
             return 0;
         }
@@ -136,10 +136,10 @@ public class Constants {
                     return 85;
                 case BAT:
                     return 100;
-                case KNIGHT:
-                    return 400;
-                case WOLF:
+                case SNAKE:
                     return 125;
+                case TURTLE:
+                    return 400;
             }
             return 0;
         }
