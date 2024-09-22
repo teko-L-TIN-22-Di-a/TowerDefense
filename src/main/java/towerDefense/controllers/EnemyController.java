@@ -1,9 +1,9 @@
 package towerDefense.controllers;
 
 import towerDefense.enemies.Bat;
-import towerDefense.enemies.Knight;
+import towerDefense.enemies.Snake;
 import towerDefense.enemies.Slime;
-import towerDefense.enemies.Wolf;
+import towerDefense.enemies.Turtle;
 import objects.PathPoint;
 import towerDefense.enemies.BaseEnemy;
 import towerDefense.helper.SpriteHelper;
@@ -159,10 +159,10 @@ public class EnemyController {
                 this.enemies.add(new Bat(x, y, 0));
                 break;
             case 2:
-                this.enemies.add(new Knight(x, y, 0));
+                this.enemies.add(new Snake(x, y, 0));
                 break;
             case 3:
-                this.enemies.add(new Wolf(x, y, 0));
+                this.enemies.add(new Turtle(x, y, 0));
         }
 
     }

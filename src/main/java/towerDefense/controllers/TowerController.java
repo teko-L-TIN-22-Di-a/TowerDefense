@@ -34,7 +34,7 @@ public class TowerController {
     }
 
     public void addTower(BaseTower selectedTower, int xPos, int yPos) {
-        towers.add(new BaseTower(xPos, yPos, towerAmount++, selectedTower.getTowerType()));
+        towers.add(new BaseTower(xPos, yPos, towerAmount++, selectedTower.getTowerType(), -1));
     }
 
     public void update() {

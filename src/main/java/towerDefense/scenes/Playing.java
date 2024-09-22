@@ -23,7 +23,6 @@ public class Playing extends GameScene implements SceneMethods {
     private BaseTower selectedTower;
 
     private BottomBar bottomBar;
-    private objects.PathPoint start, end;
 
     public Playing(Game game) {
         super(game);
@@ -57,6 +56,12 @@ public class Playing extends GameScene implements SceneMethods {
         if (isTimeForNewEnemy()) {
             if (!waveController.isWaveTimerOver())
                 spawnEnemy();
+        }
+
+        cardController.update();
+
+        if(cardController.isTimeForNewDraw()) {
+            cardController.resetDrawTimer();
         }
 
         enemyController.update();
@@ -121,7 +126,6 @@ public class Playing extends GameScene implements SceneMethods {
             g.drawImage(towerController.getTowerImgs()[selectedTower.getTowerType()], mouseX, mouseY, null);
     }
 
-
     public void setSelectedTower(BaseTower selectedTower) {
         this.selectedTower = selectedTower;
     }
@@ -175,6 +179,7 @@ public class Playing extends GameScene implements SceneMethods {
         } else if (selectedTower != null) {
             if (this.isTileGrass(this.mouseX, this.mouseY) && this.getTowerAt(this.mouseX, this.mouseY) == null) {
                 this.towerController.addTower(this.selectedTower, this.mouseX, this.mouseY);
+                bottomBar.setTowerButtonDisabled(this.selectedTower);
                 this.selectedTower = null;
             }
         } else {

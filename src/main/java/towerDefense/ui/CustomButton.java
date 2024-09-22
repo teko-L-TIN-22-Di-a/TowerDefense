@@ -3,11 +3,12 @@ package towerDefense.ui;
 import java.awt.*;
 
 public class CustomButton {
-    public int x, y, width, height, id;
+    public int x, y, width, height, towerId, id;
     private String text;
     private Rectangle bounds;
     private boolean mousePressed = false;
     private boolean mouseHover = false;
+    private boolean isDisabled = false;
 
     // For normal Buttons
     public CustomButton(String text, int x, int y, int width, int height) {
@@ -16,18 +17,19 @@ public class CustomButton {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.id = -1;
+        this.towerId = -1;
 
         initBounds();
     }
 
     // For tile buttons
-    public CustomButton(String text, int x, int y, int width, int height, int id) {
+    public CustomButton(String text, int x, int y, int width, int height, int towerId, int id) {
         this.text = text;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.towerId = towerId;
         this.id = id;
 
         initBounds();
@@ -59,7 +61,9 @@ public class CustomButton {
 
     private void drawBody(Graphics g) {
         if (mouseHover) {
-            g.setColor(Color.gray);
+            g.setColor(Color.GRAY);
+        } else if(isDisabled) {
+            g.setColor(Color.RED);
         } else {
             g.setColor(Color.WHITE);
         }
@@ -77,7 +81,14 @@ public class CustomButton {
         int w = g.getFontMetrics().stringWidth(text);
         int h = g.getFontMetrics().getHeight();
         g.drawString(text, x - w / 2 + width / 2, y + h / 2 + height / 2);
+    }
 
+    public void setDisabled(boolean state) {
+        this.isDisabled = state;
+    }
+
+    public boolean getDisabled() {
+        return this.isDisabled;
     }
 
     public void resetStates() {
@@ -108,4 +119,8 @@ public class CustomButton {
     public int getId() {
         return id;
     }
+    public int getTowerId() {
+        return towerId;
+    }
+
 }

@@ -5,16 +5,17 @@ import towerDefense.helper.Constants;
 import static towerDefense.helper.Constants.Towers.*;
 
 public class BaseTower {
-    private int x, y, id, towerType, cdTick, dmg;
+    private int x, y, id, towerType, cdTick, dmg, cardIndex;
     private float range, cooldown;
     private int tier;
 
-    public BaseTower(int x, int y, int id, int towerType) {
+    public BaseTower(int x, int y, int id, int towerType, int btnIndex) {
         this.x = x;
         this.y = y;
         this.id = id;
         this.towerType = towerType;
         tier = 1;
+        cardIndex = btnIndex;
         setDefaultDmg();
         setDefaultRange();
         setDefaultCooldown();
@@ -127,6 +128,10 @@ public class BaseTower {
 
     public int getTier() {
         return tier;
+    }
+
+    public int getCardIndex() {
+        return cardIndex;
     }
 
 }

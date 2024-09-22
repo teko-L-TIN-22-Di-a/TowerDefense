@@ -1,5 +1,6 @@
 package towerDefense.ui;
 
+import towerDefense.controllers.CardController;
 import towerDefense.helper.Constants;
 import towerDefense.maps.MapTile;
 import towerDefense.scenes.Playing;
@@ -39,7 +40,7 @@ public class BottomBar {
 
     public void removeLife() {
         lives--;
-        if(lives <= 0) {
+        if (lives <= 0) {
             SetGameState(GAME_OVER);
         }
     }
@@ -64,11 +65,11 @@ public class BottomBar {
         g.drawString("Lives: " + lives, 425, 550);
     }
 
-
     private void drawWaveInfo(Graphics g) {
         g.setColor(Color.black);
         g.setFont(new Font("LucidaSans", Font.BOLD, 20));
         drawWaveTimerInfo(g);
+        drawDrawTimerInfo(g);
         drawEnemiesLeftInfo(g);
         drawWavesLeftInfo(g);
     }
@@ -94,15 +95,30 @@ public class BottomBar {
         }
     }
 
+    private void drawDrawTimerInfo(Graphics g) {
+        if (playing.getCardController().isDrawTimerStarted()) {
+            float timeLeft = playing.getCardController().getDrawTimeLeft();
+            String formattedText = formatter.format(timeLeft);
+            g.drawString("Draw Time Left: " + formattedText, 2, 570);
+        } else {
+            bDraw.setDisabled(false);
+        }
+    }
+
     private void drawHand() {
         int cardOffset = 20;
         int x = 100;
         cardButtonList = new ArrayList<>();
+        int cardIndex = 0;
 
         for (int cardId : playing.getCardController().cardHand) {
-            cardButtonList.add(new CustomButton("", x + cardOffset, 490, 50, 50, cardId));
+            cardButtonList.add(new CustomButton("", x + cardOffset, 490, 50, 50, cardId, cardIndex));
             x = x + 50 + cardOffset;
+            cardIndex++;
         }
+
+        playing.getCardController().startDrawTimer();
+        bDraw.setDisabled(true);
     }
 
     private void drawButtons(Graphics g) {
@@ -153,7 +169,10 @@ public class BottomBar {
             g.setColor(Color.gray);
             g.fillRect(button.x, button.y, button.width, button.height);
 
-            g.drawImage(playing.getTowerController().getTowerImgs()[button.getId()], button.x, button.y, button.width, button.height, null);
+
+            if(button.getDisabled() == false) {
+                g.drawImage(playing.getTowerController().getTowerImgs()[button.getTowerId()], button.x, button.y, button.width, button.height, null);
+            }
 
             if (button.isMouseOver()) {
                 g.setColor(Color.white);
@@ -174,14 +193,18 @@ public class BottomBar {
         this.infoBoxTower = t;
     }
 
+    public void setTowerButtonDisabled(BaseTower t) {
+        cardButtonList.stream().filter(x -> x.id == t.getCardIndex()).findFirst().get().setDisabled(true);
+    }
+
     public void mouseClicked(int x, int y) {
-        if (bDraw.getBounds().contains(x, y)) {
+        if (bDraw.getBounds().contains(x, y) && playing.getCardController().getDrawEnabled()) {
             playing.getCardController().createHand();
             drawHand();
         } else {
             for (CustomButton button : cardButtonList) {
-                if (button.getBounds().contains(x, y)) {
-                    selectedTower = new BaseTower(0, 0, -1, button.getId());
+                if (button.getBounds().contains(x, y) && button.getDisabled() == false) {
+                    selectedTower = new BaseTower(0, 0, -1, button.getTowerId(), button.id);
                     playing.setSelectedTower(selectedTower);
                     return;
                 }
