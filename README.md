@@ -19,11 +19,11 @@ Das Spiel ist geplant als ein klassisches Tower-Defense, mit dem Unterschied, da
 ## User-Interface
 
 - Hauptmenü mit Buttons für Start und Exit
-- Während des Spieles die Spielerhand mit den Karten am unteren Bildschirmrand + Übersicht an Einkommen, Geld im Besitz des Spielers und Informationen an Gegner.
+- Während des Spieles die Spielerhand mit den Karten am unteren Bildschirmrand + Übersicht für den Status einer Wave und weiteren Informationen.
 
 ## Grafiken und Sounds
 
-Es werden geometrische Formen als Spielfiguren benutzt. Desto mehr Ecken ein Figur besitzt, umso stärker ist diese.
+Einbinden eines bearbeiteten Spritesheets aus dem Internet.
 Sounds werden je nach Möglichkeit aus dem Internet bezogen mit einen gültigen, freien Lizenz.
 
 ## Schwierigkeitsstufen
@@ -32,4 +32,5 @@ Nach Möglichkeit und Zeit werden Schwierigkeitsstufen eingefügt, welche jedoch
 
 ## Benutzung
 
-Projekt klonen und die main() Methode aufrufen
+Umgewandelt in ein Maven Projekt.
+Projekt klonen und die main() Methode aufrufen.
