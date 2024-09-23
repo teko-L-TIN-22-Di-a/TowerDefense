@@ -33,4 +33,5 @@ Nach Möglichkeit und Zeit werden Schwierigkeitsstufen eingefügt, welche jedoch
 ## Benutzung
 
 Umgewandelt in ein Maven Projekt.
-Projekt klonen und die main() Methode aufrufen.
+Am einfachsten ist es, den Release herunterzuladen. Dieser enthält die Artifaktdatei.
+Per Source Coude -> Projekt klonen und die main() Methode aufrufen.
